@@ -1,5 +1,5 @@
 import mssql from 'mssql'
-const {  addStudent, fetchAllStudents, fetchOneStudent, deleteStudent } = require('../Controllers/studentManager');
+const {  addStudent, fetchAllStudents, fetchOneStudent, deleteStudent,payFees } = require('../Controllers/studentManager');
 
 const res = {json: jest.fn()}
 
@@ -69,13 +69,13 @@ describe("fetching details for a single student",()=>{
     it("should fetch details for a single student",async()=>{
 
         const mockedStudent =  {
-            "id": "5c21c3c3-f289-4238-85ee-b3534e52765a",
+            "id": "student_id",
             "full_name": "John Kiriamiti",
-            "fee_balance": "1000",
+            "fee_balance": "1000", 
             "currentClass": "year 2 Bsc Computer Science"
           }
 
-        const mockedStudentId = 'bac727c4-4178-427a-a239-063f5c58ae86'
+        const mockedStudentId = 'student_id'
 
 
         const req = {
@@ -177,6 +177,31 @@ describe("delete student",()=>{
 
 describe("update fee balance for specified student",()=>{
     it("should return a message for successful fee balance update", async()=>{
+
+        const mockedStudentId = '969f9f87-e948-4895-a183-21474d3ced78'
+
+        const req = {
+            params:{
+                id:mockedStudentId
+            }
+        }
+        
+
+        jest.spyOn(mssql, "connect").mockResolvedValueOnce({
+            request: jest.fn().mockReturnThis(),
+            input: jest.fn().mockReturnThis(),
+            execute: jest.fn().mockResolvedValueOnce({
+                rowsAffected: [1]
+            })
+        })
+
+        await payFees(req, res)
+
+        expect(res.json).toHaveBeenCalledWith({
+            message: "Fees has been paid successfully. School fees balance has been updated"
+        })
+
+
 
     })
 

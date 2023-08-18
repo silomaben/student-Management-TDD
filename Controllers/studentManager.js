@@ -102,10 +102,19 @@ const deleteStudent = async(req,res)=>{
     }
 }
 
+const payFees = async(req,res)=>{
+    try {
+        
+    } catch (error) {
+        
+    }
+}
+
 
 module.exports = {
     addStudent,
     fetchAllStudents,
     fetchOneStudent,
-    deleteStudent
+    deleteStudent,
+    payFees
 }
