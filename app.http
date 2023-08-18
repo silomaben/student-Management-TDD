@@ -1,0 +1,29 @@
+#register a new student
+POST http://localhost:4500/studentManagement
+Content-Type: application/json
+
+{
+    "full_name": "peter Kiriamiti",
+    "fee_balance": 2000,
+    "currentClass": "year 2 Bsc Computer Science"
+}
+
+###
+#fetch all students
+GET http://localhost:4500/studentManagement
+
+
+###
+#fetch a single student
+GET http://localhost:4500/studentManagement/5c21c3c3-f289-4238-85ee-b3534e52765a
+
+
+
+
+
+
+
+
+###
+#delete student by id
+DELETE  http://localhost:4500/studentManagement/5c21c3c3-f289-4238-85ee-b3534e52765a
